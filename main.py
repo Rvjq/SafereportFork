@@ -37,7 +37,7 @@ def verificar_arquivos():
     
     if not os.path.exists("data/comentarios.csv"):
         with open("data/comentarios.csv", "w") as arquivo:
-            escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia"])
+            escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
             escritor.writeheader()
 
 def main():

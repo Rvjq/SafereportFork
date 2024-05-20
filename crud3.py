@@ -1,6 +1,15 @@
 import os
 import csv
 
+def generate_id():
+    with open("data/comentarios.csv", "r") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            pass
+        if not linha:
+            return 1
+        return int(linha["id_comentario"]) + 1
+
 def create_comentario(nome_do_usuario):
     print("┌───────────────────────────────────┐")
     print("│      Criar um novo comentário     │")
@@ -9,8 +18,8 @@ def create_comentario(nome_do_usuario):
     autor = nome_do_usuario
     id_denuncia = input("Digite o ID da denúncia: ")
     with open("data/comentarios.csv", "a") as arquivo:
-        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia"])
-        escritor.writerow({"comentario": comentario, "autor": autor, "id_denuncia": id_denuncia})
+        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia, id_comentario"])
+        escritor.writerow({"comentario": comentario, "autor": autor, "id_denuncia": id_denuncia, "id_comentario": generate_id()})
     print("Comentário criado com sucesso!")
     input("Pressione Enter para continuar...")
     limpar()
@@ -20,12 +29,12 @@ def read_comentarios():
     print("│        Comentários no sistema     │")
     print("└───────────────────────────────────┘")
     print("┌─────────────────┬─────────────────┐")
-    print("│       ID        │     Comentário   │")
+    print("│       ID        │    Comentário   │")
     print("├─────────────────┼─────────────────┤")
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            print("│",linha["id_denuncia"]," "*(14-len(linha["id_denuncia"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│")
+            print("│",linha["id_comentario"]," "*(14-len(linha["id_denuncia"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│")
     print("└─────────────────┴─────────────────┘")
     input("Pressione Enter para continuar...")
     limpar()
@@ -36,21 +45,19 @@ def update_comentario():
     print("└───────────────────────────────────┘")
     id_comentario = input("Digite o ID do comentário que deseja atualizar: ")
     comentario = input("Digite o novo comentário: ")
-    autor = input("Digite o novo autor: ")
-    id_denuncia = input("Digite o novo ID da denúncia: ")
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         comentarios = []
         for linha in leitor:
-            if linha["id_denuncia"] == id_comentario:
+            if linha["id_comentario"] == id_comentario:
                 linha["comentario"] = comentario
-                linha["autor"] = autor
-                linha["id_denuncia"] = id_denuncia
                 print("Comentário atualizado com sucesso!")
             comentarios.append(linha)
     with open("data/comentarios.csv", "w") as arquivo:
-        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia"])
+        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
         escritor.writeheader()
+        for comentario in comentarios:
+            escritor.writerow(comentario)
 
 def delete_comentario():
     print("┌───────────────────────────────────┐")
@@ -61,12 +68,12 @@ def delete_comentario():
         leitor = csv.DictReader(arquivo)
         comentarios = []
         for linha in leitor:
-            if linha["id_denuncia"] == id_comentario:
+            if linha["id_comentario"] == id_comentario:
                 print("Comentário excluído com sucesso!")
             else:
                 comentarios.append(linha)
     with open("data/comentarios.csv", "w") as arquivo:
-        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia"])
+        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
         escritor.writeheader()
         for comentario in comentarios:
             escritor.writerow(comentario)
