@@ -25,18 +25,25 @@ def create_comentario(nome_do_usuario):
     input("Pressione Enter para continuar...")
     limpar()
 
+def denunciaporid(id_denuncia):
+    with open("data/denuncias.csv", "r") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            if linha["id_denuncia"] == id_denuncia:
+                return linha["descricao"]
+
 def read_comentarios():
-    print("┌───────────────────────────────────┐")
-    print("│        Comentários no sistema     │")
-    print("└───────────────────────────────────┘")
-    print("┌─────────────────┬─────────────────┐")
-    print("│       ID        │    Comentário   │")
-    print("├─────────────────┼─────────────────┤")
+    print("┌───────────────────────────────────────────────────────┐")
+    print("│                  Comentários no sistema               │")
+    print("└───────────────────────────────────────────────────────┘")
+    print("┌─────────────────┬─────────────────┬───────────────────┐")
+    print("│       ID        │    Comentário   │      Denuncia     │")
+    print("├─────────────────┼─────────────────┼───────────────────┤")
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            print("│",linha["id_comentario"]," "*(14-len(linha["id_denuncia"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│")
-    print("└─────────────────┴─────────────────┘")
+            print("│",linha["id_comentario"]," "*(14-len(linha["id_comentario"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│",denunciaporid(linha["id_denuncia"])," "*(20-len(denunciaporid(linha["id_denuncia"]))),"│")
+    print("└─────────────────┴─────────────────┴───────────────────┘")
     input("Pressione Enter para continuar...")
     limpar()
 

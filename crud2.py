@@ -26,17 +26,17 @@ def create_denuncia(nome_de_usuario):
     limpar()
 
 def read_denuncias():
-    print("┌───────────────────────────────────┐")
-    print("│         Denúncias no sistema      │")
-    print("└───────────────────────────────────┘")
-    print("┌─────────────────┬─────────────────┐")
-    print("│       ID        │      Título     │")
-    print("├─────────────────┼─────────────────┤")
+    print("┌───────────────────────────────────────────────────────┐")
+    print("│                   Denúncias no sistema                │")
+    print("└───────────────────────────────────────────────────────┘")
+    print("┌─────────────────┬─────────────────┬───────────────────┐")
+    print("│       ID        │      Título     │      Denuncia     │")
+    print("├─────────────────┼─────────────────┼───────────────────┤")
     with open("data/denuncias.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            print("│",linha["id_denuncia"]," "*(14-len(linha["id_denuncia"])),"│",linha["titulo"]," "*(14-len(linha["titulo"])),"│")
-    print("└─────────────────┴─────────────────┘")
+            print("│",linha["id_denuncia"]," "*(14-len(linha["id_denuncia"])),"│",linha["titulo"]," "*(14-len(linha["titulo"])),"│",linha["descricao"]," "*(20-len(linha["descricao"])),"│")
+    print("└─────────────────┴─────────────────┴───────────────────┘")
     input("Pressione Enter para continuar...")
     limpar()
 
