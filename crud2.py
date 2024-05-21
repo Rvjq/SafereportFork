@@ -4,6 +4,7 @@ import csv
 def generate_id():
     with open("data/denuncias.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
+        linha = False
         for linha in leitor:
             pass
         if not linha:
@@ -93,8 +94,8 @@ def main(nome_do_usuario):
         print("┌──────────────────────────────────┐")
         print("│ 1. │ Criar denúncia              │")
         print("│ 2. │ Ver denúncias               │")
-        print("│ 3. │ Excluir denúncia            │")
-        print("│ 4. │ Atualizar denúncia          │")
+        print("│ 3. │ Atualizar denúncia          │")
+        print("│ 4. │ Excluir denúncia            │")
         print("│ 0. │ \033[0;31mSair\033[0m                        │")
         print("└──────────────────────────────────┘")
 
@@ -128,4 +129,4 @@ def limpar():
     os.system("cls" if os.name == "nt" else "clear")
 
 if __name__ == "__main__":
-    main()
+    main("Debug")

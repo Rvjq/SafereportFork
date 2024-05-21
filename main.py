@@ -97,6 +97,7 @@ def main():
             limpar()
             break
         else:
+            limpar()
             opcao_invalida()
 
 def opcao_invalida():  

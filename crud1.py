@@ -1,10 +1,10 @@
 import os
 import csv
-import random
 
 def generate_id():
     with open("data/usuarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
+        linha = False
         for linha in leitor:
             pass
         if not linha:

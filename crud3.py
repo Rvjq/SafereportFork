@@ -4,6 +4,7 @@ import csv
 def generate_id():
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
+        linha = False
         for linha in leitor:
             pass
         if not linha:
@@ -18,7 +19,7 @@ def create_comentario(nome_do_usuario):
     autor = nome_do_usuario
     id_denuncia = input("Digite o ID da denúncia: ")
     with open("data/comentarios.csv", "a") as arquivo:
-        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia, id_comentario"])
+        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
         escritor.writerow({"comentario": comentario, "autor": autor, "id_denuncia": id_denuncia, "id_comentario": generate_id()})
     print("Comentário criado com sucesso!")
     input("Pressione Enter para continuar...")
@@ -122,4 +123,4 @@ def limpar():
     os.system("cls" if os.name == "nt" else "clear")
 
 if __name__ == "__main__":
-    main()
+    main("Debug")
