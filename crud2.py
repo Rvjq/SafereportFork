@@ -82,6 +82,22 @@ def delete_denuncia():
         escritor.writeheader()
         for denuncia in denuncias:
             escritor.writerow(denuncia)
+    
+    # Excluindo comentários relacionados à denúncia
+    with open("data/comentarios.csv", "r") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        comentarios = []
+        for linha in leitor:
+            if linha["id_denuncia"] == id_denuncia:
+                print("Comentário excluído com sucesso!")
+            else:
+                comentarios.append(linha)
+    with open("data/comentarios.csv", "w") as arquivo:
+        escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
+        escritor.writeheader()
+        for comentario in comentarios:
+            escritor.writerow(comentario)
+    
     input("Pressione Enter para continuar...")
     limpar()
 

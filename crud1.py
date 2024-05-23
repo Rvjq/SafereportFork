@@ -11,11 +11,30 @@ def generate_id():
             return 1
         return int(linha["id_usuario"]) + 1
 
+def checar_nome (nome):
+    if nome == "":
+        print("Nome não pode ser vazio")
+        return True
+    elif nome == "Anonimo":
+        print("O nome \"Anonimo\" não pode ser usado")
+        return True
+    with open("data/usuarios.csv", "r") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            if linha["nome"] == nome:
+                print("Esse Nome já existe em nosso sistema")
+                return True
+    return False
+
 def create_conta():
     print("┌───────────────────────────────────┐")
     print("│        Criar uma nova conta       │")
     print("└───────────────────────────────────┘")
     nome = input("Digite seu nome: ")
+    if checar_nome(nome):
+        input("Pressione Enter para continuar...")
+        limpar()
+        return
     email = input("Digite seu email: ")
     senha = input("Digite sua senha: ")
     with open("data/usuarios.csv", "a") as arquivo:

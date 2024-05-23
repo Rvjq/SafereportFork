@@ -11,6 +11,14 @@ def generate_id():
             return 1
         return int(linha["id_comentario"]) + 1
 
+def checar_denuncia(id_denuncia):
+    with open("data/denuncias.csv", "r") as arquivo:
+        leitor = csv.DictReader(arquivo)
+        for linha in leitor:
+            if linha["id_denuncia"] == id_denuncia:
+                return True
+    return False
+
 def create_comentario(nome_do_usuario):
     print("┌───────────────────────────────────┐")
     print("│      Criar um novo comentário     │")
@@ -18,6 +26,11 @@ def create_comentario(nome_do_usuario):
     comentario = input("Digite o comentário: ")
     autor = nome_do_usuario
     id_denuncia = input("Digite o ID da denúncia: ")
+    if checar_denuncia(id_denuncia) == False:
+        print("Denúncia não encontrada!")
+        input("Pressione Enter para continuar...")
+        limpar()
+        return
     with open("data/comentarios.csv", "a") as arquivo:
         escritor = csv.DictWriter(arquivo, fieldnames=["comentario", "autor", "id_denuncia", "id_comentario"])
         escritor.writerow({"comentario": comentario, "autor": autor, "id_denuncia": id_denuncia, "id_comentario": generate_id()})
@@ -25,7 +38,7 @@ def create_comentario(nome_do_usuario):
     input("Pressione Enter para continuar...")
     limpar()
 
-def denunciaporid(id_denuncia):
+def denuncia_por_id(id_denuncia):
     with open("data/denuncias.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
@@ -42,7 +55,7 @@ def read_comentarios():
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         for linha in leitor:
-            print("│",linha["id_comentario"]," "*(14-len(linha["id_comentario"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│",denunciaporid(linha["id_denuncia"])," "*(20-len(denunciaporid(linha["id_denuncia"]))),"│")
+            print("│",linha["id_comentario"]," "*(14-len(linha["id_comentario"])),"│",linha["comentario"]," "*(14-len(linha["comentario"])),"│",denuncia_por_id(linha["id_denuncia"])," "*(20-len(denuncia_por_id(linha["id_denuncia"]))),"│")
     print("└─────────────────┴─────────────────┴───────────────────┘")
     input("Pressione Enter para continuar...")
     limpar()
