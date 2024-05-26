@@ -1,5 +1,5 @@
 import os, csv
-import crud1, crud2, crud3, crud4
+import crud_usuarios, crud_denuncias, crud_comentarios
 
 def login():
     limpar()
@@ -63,7 +63,6 @@ def main():
             print("│ 4. │ \033[0;31mComentar em uma denúncia\033[0m    │")
         else:
             print("│ 4. │ Comentar em uma denúncia    │")
-        print("│ 5. │ Dar um tapa na careca de ED │")
         print("│ 0. │ \033[0;31mSair\033[0m                        │")
         print("└──────────────────────────────────┘")
 
@@ -76,23 +75,21 @@ def main():
             else:
                 nome_do_usuario = "Anonimo"
         elif escolha == "2":
-            crud1.main()
+            crud_usuarios.main()
         elif escolha == "3":
             if nome_do_usuario == "Anonimo":
                 print("Você precisa estar logado para fazer uma denúncia.")
                 input("Pressione Enter para continuar...")
                 limpar()
             else:
-                crud2.main(nome_do_usuario)
+                crud_denuncias.main(nome_do_usuario)
         elif escolha == "4":
             if nome_do_usuario == "Anonimo":
                 print("Você precisa estar logado para comentar em uma denúncia.")
                 input("Pressione Enter para continuar...")
                 limpar()
             else:
-                crud3.main(nome_do_usuario)
-        elif escolha == "5":
-            crud4.main()
+                crud_comentarios.main(nome_do_usuario)
         elif escolha == "0":
             limpar()
             break
