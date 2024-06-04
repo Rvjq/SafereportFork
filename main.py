@@ -54,7 +54,7 @@ def main():
             print("│ 1. │ login                       │")
         else:
             print("│ 1. │ logout                      │")
-        print("│ 2. │ Sigup                       │")
+        print("│ 2. │ Signup                       │")
         if nome_do_usuario == "Anonimo":
             print("│ 3. │ \033[0;31mFazer denúncia\033[0m              │")
         else:
