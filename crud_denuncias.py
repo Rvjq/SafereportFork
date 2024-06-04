@@ -83,7 +83,6 @@ def delete_denuncia():
         for denuncia in denuncias:
             escritor.writerow(denuncia)
     
-    # Excluindo comentários relacionados à denúncia
     with open("data/comentarios.csv", "r") as arquivo:
         leitor = csv.DictReader(arquivo)
         comentarios = []
