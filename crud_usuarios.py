@@ -130,7 +130,7 @@ def main():
             update_senha()
         elif escolha == "4":
             limpar()
-            delete_conta
+            delete_conta()
         elif escolha == "0":
             limpar()
             break
